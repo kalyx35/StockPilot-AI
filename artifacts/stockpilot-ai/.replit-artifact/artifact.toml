@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "StockPilot AI"
+description = "A decision-support dashboard for short-term stock swing trading analysis, with live market data, technical signals, risk framing, watchlists, and stock comparison."
+version = "1.0.0"
+id = "artifacts/stockpilot-ai"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25470
+
+[services.development]
+run = "pnpm --filter @workspace/stockpilot-ai run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/stockpilot-ai", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/stockpilot-ai/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25470"
+BASE_PATH = "/"

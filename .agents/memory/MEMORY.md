@@ -1,0 +1,1 @@
+- [Market data provider](market-data-provider.md) — Public delayed chart data needs caching, explicit unavailable states, and flexible one-month history thresholds.

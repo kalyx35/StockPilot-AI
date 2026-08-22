@@ -1,0 +1,697 @@
+Build a complete, production-ready web application called **StockPilot AI** for short-term stock swing trading analysis.
+
+I am uploading an existing project ZIP. **Use the uploaded project as the starting point and preserve/reuse any useful existing code, models, tests, datasets, configurations, and functionality.** Do not unnecessarily rewrite working components. However, if the existing implementation is incomplete, broken, poorly structured, or unsuitable for a ready-to-use application, improve or replace it as needed.
+
+## IMPORTANT
+
+I do NOT want a tutorial, explanation of the technical implementation, or a step-by-step development plan.
+
+**Your job is to build the entire application.**
+
+Make the decisions yourself. Install whatever dependencies are required, create/modify files, run the application, run tests, fix errors, and keep iterating until the application is functional.
+
+Do not stop after creating a skeleton or prototype.
+
+I want to be able to open the Replit app and actually use it.
+
+---
+
+# 1. PURPOSE OF THE APPLICATION
+
+The application should help a user analyze stocks for **short-term swing trading**, with a typical holding period of approximately **a few days to several weeks**.
+
+The application should answer questions such as:
+
+* Is this stock currently attractive for a swing trade?
+* Should I BUY, HOLD, or AVOID/SELL?
+* What is the expected short-term price direction?
+* What is the confidence level of the prediction?
+* What are the important technical factors behind the signal?
+* What could be a reasonable entry zone?
+* What could be a reasonable stop-loss?
+* What could be reasonable profit targets?
+* What is the risk/reward ratio?
+* What could invalidate the trade?
+* What is the overall strength of the setup?
+
+The application is a **decision-support and educational tool**, not a guarantee of future stock prices or investment returns.
+
+---
+
+# 2. USER EXPERIENCE
+
+The application should have a polished, modern financial dashboard UI.
+
+It should feel like a real SaaS product, not a college project.
+
+Use:
+
+* Modern dark/light interface
+* Responsive design
+* Clean typography
+* Professional cards
+* Interactive charts
+* Clear visual hierarchy
+* Green/red/neutral indicators where appropriate
+* Smooth loading states
+* Error states
+* Tooltips where useful
+* Mobile-friendly layout
+
+The primary workflow should be extremely simple:
+
+### User enters a stock symbol
+
+For example:
+
+TCS
+
+RELIANCE
+
+INFY
+
+TATAMOTORS
+
+The app fetches the latest available market data, analyzes it, runs the prediction system, and displays a clear result.
+
+---
+
+# 3. MAIN DASHBOARD
+
+Create a dashboard containing:
+
+### Stock Search
+
+A prominent search box:
+
+"Enter stock symbol"
+
+Support Indian stocks and NSE/BSE symbols wherever the available market-data provider allows it.
+
+Examples:
+
+* TCS
+* INFY
+* RELIANCE
+* HDFCBANK
+* TATAMOTORS
+* ITC
+
+Allow the user to search and analyze a stock.
+
+---
+
+# 4. STOCK OVERVIEW
+
+After selecting a stock, display:
+
+* Company name
+* Symbol
+* Current/latest price
+* Today's change
+* Percentage change
+* Previous close
+* Day high
+* Day low
+* 52-week high
+* 52-week low
+* Trading volume
+* Last updated timestamp
+
+Make it obvious when market data is delayed or unavailable.
+
+Never fabricate market data.
+
+---
+
+# 5. INTERACTIVE PRICE CHART
+
+Create an interactive candlestick chart.
+
+Include:
+
+* OHLC candles
+* Volume
+* Adjustable time period
+
+Allow:
+
+* 1 month
+* 3 months
+* 6 months
+* 1 year
+* 2 years
+* Maximum available
+
+Overlay useful indicators such as:
+
+* SMA 20
+* SMA 50
+* SMA 200
+* EMA 20
+* EMA 50
+
+Allow indicators to be toggled on/off.
+
+The chart should look professional and be easy to interpret.
+
+---
+
+# 6. TECHNICAL ANALYSIS
+
+Calculate and display useful technical indicators, including where data permits:
+
+### Trend
+
+* SMA 20
+* SMA 50
+* SMA 200
+* EMA 20
+* EMA 50
+* Price relative to moving averages
+
+### Momentum
+
+* RSI
+* MACD
+* MACD signal
+* MACD histogram
+* Stochastic oscillator
+
+### Volatility
+
+* ATR
+* Bollinger Bands
+
+### Volume
+
+* Volume
+* Average volume
+* Relative volume
+
+### Other useful signals
+
+* Support levels
+* Resistance levels
+* Recent highs/lows
+* Trend direction
+* Breakout/breakdown conditions
+
+Do not overwhelm the user with raw numbers.
+
+Translate indicators into understandable signals.
+
+For example:
+
+RSI: 64 → "Bullish momentum, but approaching overbought territory"
+
+Price above SMA 50 → "Medium-term trend is bullish"
+
+Volume above average → "Above-average participation"
+
+---
+
+# 7. AI / ML PREDICTION
+
+Use the existing ML model from the uploaded project if it is usable.
+
+If the uploaded model is incomplete or broken, implement a robust prediction pipeline.
+
+The model should focus on **short-term directional prediction**, not pretend to know the exact future price.
+
+Prefer predicting things such as:
+
+* Probability of price increasing over the chosen horizon
+* Probability of price decreasing
+* Expected direction
+* Confidence
+
+Useful prediction horizons:
+
+* 3 trading days
+* 5 trading days
+* 10 trading days
+* 20 trading days
+
+The user should be able to select the horizon.
+
+Display something like:
+
+**5-Day Prediction**
+
+Bullish Probability: 72%
+
+Bearish Probability: 28%
+
+Prediction: BULLISH
+
+Confidence: HIGH
+
+Do not manufacture confidence numbers. They must be derived from the model or a clearly defined scoring system.
+
+---
+
+# 8. BUY / HOLD / AVOID SIGNAL
+
+The most important part of the application should be a clear trading signal.
+
+Display a large signal card:
+
+### BUY
+
+or
+
+### HOLD
+
+or
+
+### AVOID
+
+Also show:
+
+* Signal strength
+* Confidence
+* Risk level
+* Short-term trend
+* Momentum
+* Volatility
+* Volume confirmation
+
+The signal should combine the ML prediction with relevant technical factors.
+
+Do not make the signal dependent on a single indicator.
+
+---
+
+# 9. TRADE SETUP
+
+For a bullish setup, calculate a sensible hypothetical trade setup based on recent price action and volatility.
+
+Display:
+
+### Entry Zone
+
+Example:
+
+₹X – ₹Y
+
+### Stop Loss
+
+₹X
+
+### Target 1
+
+₹X
+
+### Target 2
+
+₹X
+
+### Risk/Reward
+
+1 : X
+
+Also show:
+
+"Trade Setup Quality"
+
+with a score or category such as:
+
+Excellent / Good / Moderate / Weak
+
+The calculations should be based on actual market data and indicators such as ATR, support/resistance, and recent price structure.
+
+Do not simply invent fixed percentages.
+
+If a reasonable trade setup cannot be established, explicitly say:
+
+"No reliable trade setup detected."
+
+---
+
+# 10. EXPLANATION OF THE SIGNAL
+
+The application should explain WHY the signal was generated.
+
+For example:
+
+### Why this signal?
+
+✓ Price is above the 50-day moving average
+
+✓ RSI indicates positive momentum
+
+✓ MACD has a bullish crossover
+
+✓ Volume is above its recent average
+
+✓ ML model estimates a 74% probability of positive movement
+
+⚠ Resistance is close to the current price
+
+⚠ Volatility is elevated
+
+This section is extremely important.
+
+The user should not have to understand machine learning to use the application.
+
+---
+
+# 11. RISK ANALYSIS
+
+Create a dedicated risk section.
+
+Display:
+
+* Volatility level
+* ATR
+* Distance to stop-loss
+* Potential downside
+* Potential upside
+* Risk/reward
+* Market trend
+* Setup quality
+
+Use understandable labels:
+
+Low Risk
+
+Moderate Risk
+
+High Risk
+
+Avoid making unrealistic claims such as "safe trade".
+
+---
+
+# 12. WATCHLIST
+
+Allow the user to add stocks to a watchlist.
+
+The watchlist should show:
+
+* Symbol
+* Current price
+* Daily change
+* Signal
+* Confidence
+* Trend
+* Last updated
+
+Allow stocks to be:
+
+* Added
+* Removed
+* Reordered if practical
+
+Persist the watchlist.
+
+---
+
+# 13. STOCK COMPARISON
+
+Allow users to compare multiple stocks.
+
+For example:
+
+TCS vs INFY vs HCLTECH
+
+Display:
+
+* Trend
+* RSI
+* Momentum
+* Volatility
+* ML probability
+* Signal
+* Risk/reward
+* Overall score
+
+Highlight the strongest setup.
+
+---
+
+# 14. MARKET OVERVIEW
+
+Create a market overview section.
+
+Where data is available, show major Indian indices such as:
+
+* NIFTY 50
+* BANK NIFTY
+* SENSEX
+
+Show:
+
+* Current value
+* Daily movement
+* Trend
+* Market sentiment
+
+The stock signal should take broader market conditions into account where appropriate.
+
+For example, a bullish stock setup during a strongly bearish market should have its risk appropriately reflected.
+
+---
+
+# 15. NEWS / CATALYSTS
+
+If reliable news APIs are available in the environment, integrate recent stock/company news.
+
+Display:
+
+* Recent headlines
+* Publication time
+* Source
+* Positive/negative/neutral classification where reliable
+
+Do NOT fabricate news.
+
+If no reliable news provider is available, gracefully hide this feature rather than displaying fake data.
+
+---
+
+# 16. DATA HANDLING
+
+Use reliable market-data sources that can reasonably be accessed from Replit.
+
+The application must:
+
+* Handle API failures
+* Handle missing data
+* Handle invalid symbols
+* Handle rate limits
+* Cache data where sensible
+* Display timestamps
+* Never silently substitute fake data for real market data
+
+If an API requires a key, create a clear `.env` configuration and provide a friendly UI message when the key is missing.
+
+Do not hard-code API keys or secrets.
+
+---
+
+# 17. MODEL PIPELINE
+
+If the uploaded project already contains:
+
+* Feature engineering
+* Trained models
+* Training scripts
+* Prediction code
+* Backtesting
+* Tests
+
+reuse and integrate them.
+
+Do not throw away working ML work just to make a simpler application.
+
+If improvements are necessary, make them.
+
+The final application should have a clean separation between:
+
+* Data acquisition
+* Data preprocessing
+* Feature engineering
+* Model inference
+* Technical analysis
+* Signal generation
+* Trade setup generation
+* API/backend
+* Frontend
+
+---
+
+# 18. BACKTESTING
+
+Include a backtesting section if the existing project already supports it, and improve it if necessary.
+
+Allow the user to see historical performance of the strategy.
+
+Display metrics such as:
+
+* Total return
+* Win rate
+* Number of trades
+* Average return per trade
+* Maximum drawdown
+* Profit factor where appropriate
+
+Clearly distinguish historical backtesting from future predictions.
+
+Do not claim that backtested performance guarantees future returns.
+
+---
+
+# 19. MODEL HEALTH
+
+Create a small model-information section.
+
+Display, where available:
+
+* Model type
+* Training period
+* Prediction horizon
+* Validation performance
+* Last training date
+* Number of features
+
+If these values are unavailable, do not fabricate them.
+
+---
+
+# 20. ERROR HANDLING
+
+The application must never crash because:
+
+* Stock symbol is invalid
+* API is unavailable
+* Market is closed
+* Historical data is insufficient
+* Model file is missing
+* Network request fails
+* Indicator cannot be calculated
+* User enters invalid input
+
+Instead, show useful error messages and allow the user to retry.
+
+---
+
+# 21. PERFORMANCE
+
+Optimize the application so it feels fast.
+
+Use:
+
+* Caching
+* Lazy loading where appropriate
+* Efficient API calls
+* Avoid unnecessary model retraining
+* Avoid fetching identical historical data repeatedly
+
+Do not train models every time a user searches for a stock.
+
+---
+
+# 22. SECURITY
+
+Never expose:
+
+* API keys
+* Secrets
+* Environment variables
+* Internal credentials
+
+in the frontend.
+
+Use environment variables for secrets.
+
+Validate user input.
+
+---
+
+# 23. RESPONSIVE DESIGN
+
+The application must work properly on:
+
+* Desktop
+* Laptop
+* Tablet
+* Mobile
+
+The primary dashboard should remain usable on smaller screens.
+
+---
+
+# 24. LANDING PAGE
+
+Create a polished landing/dashboard entry point.
+
+Title:
+
+**StockPilot AI**
+
+Subtitle:
+
+**AI-powered swing trading analysis for smarter decisions.**
+
+Include a clear CTA:
+
+**Analyze a Stock**
+
+The visual design should feel similar in quality to a modern fintech/SaaS application.
+
+Avoid generic-looking templates.
+
+---
+
+# 25. IMPORTANT PRODUCT PRINCIPLE
+
+The application should NOT feel like:
+
+"Here are 25 technical indicators. Good luck."
+
+It should feel like:
+
+"I entered TCS. Tell me what the current setup looks like, why you think that, what the risks are, and what I should watch."
+
+Prioritize actionable interpretation over displaying excessive technical data.
+
+---
+
+# 26. FINAL REQUIREMENT
+
+You are responsible for completing the application.
+
+Do NOT stop at:
+
+* Planning
+* Architecture
+* Creating placeholder pages
+* Mock data
+* TODO comments
+* Pseudocode
+* A partially implemented frontend
+* A backend without a usable frontend
+
+Actually implement the features.
+
+After implementation:
+
+1. Install dependencies.
+2. Start the application.
+3. Test the main user flows.
+4. Run all existing tests.
+5. Fix errors.
+6. Check frontend/backend integration.
+7. Check that stock search works.
+8. Check that predictions work.
+9. Check that charts render.
+10. Check that invalid inputs are handled.
+11. Check that the application works from a fresh Replit run.
+
+If something from the original project conflicts with these requirements, prioritize a **working, usable application** while preserving valuable existing functionality.
+
+Do not ask me to make technical decisions unless absolutely necessary.
+
+**Take ownership of the implementation and deliver the finished application.**
